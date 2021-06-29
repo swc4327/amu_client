@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.JoinActivity">
+
+
+    <EditText
+        android:id="@+id/join_email"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="100dp"
+        android:inputType="textPersonName"
+        android:hint="email"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/join_password"/>
+
+    <EditText
+        android:id="@+id/join_password"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:inputType="textPersonName"
+        android:hint="password"
+        app:layout_constraintTop_toBottomOf="@id/join_email"
+        app:layout_constraintBottom_toTopOf="@id/join_button"/>
+
+    <Button
+        android:id="@+id/join_button"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="회원가입"
+        android:textColor="#ffffff"
+        app:layout_constraintTop_toBottomOf="@id/join_password" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

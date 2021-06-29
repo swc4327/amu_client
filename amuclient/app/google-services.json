@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "729601613890",
+    "project_id": "amuclient-ef861",
+    "storage_bucket": "amuclient-ef861.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:729601613890:android:c14bbc0a7cdbf9ec50cddb",
+        "android_client_info": {
+          "package_name": "com.awesome.amuclient"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "729601613890-d2ad3pvi98rj2gverkq81ano69g9bqa0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAahRU6N-3aQyVTudRt8Q-9MT9v_k7GOTM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "729601613890-d2ad3pvi98rj2gverkq81ano69g9bqa0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
