@@ -1,0 +1,18 @@
+package com.awesome.amuclient.ui.main.viewmodel
+
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import com.awesome.amuclient.data.model.ReserveList
+import com.awesome.amuclient.data.model.remote.ReserveApi
+
+class ReserveViewModel(private var clientId: String) : ViewModel() {
+    private val reserveApi = ReserveApi()
+    val reserveLists = MutableLiveData<ArrayList<ReserveList>>()
+
+    val status = MutableLiveData<Int>()
+
+    fun getReserveList() {
+        reserveApi.getReserveList(reserveLists, clientId)
+    }
+
+}

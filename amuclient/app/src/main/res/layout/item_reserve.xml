@@ -9,11 +9,13 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:weightSum="5"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:weightSum="5"
             android:orientation="horizontal">
 
@@ -41,6 +43,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="2"
             android:orientation="horizontal">
 
             <de.hdodenhof.circleimageview.CircleImageView
@@ -73,14 +76,14 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/go_review_act"
+            android:id="@+id/go_review"
             android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:backgroundTint="@color/white"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
             android:gravity="center"
-            android:text="리뷰쓰기"
             android:textColor="@color/black"
-            app:backgroundTint="@color/white" />
+            app:backgroundTint="@color/white"
+            android:text="리뷰쓰기"/>
 
     </LinearLayout>
 

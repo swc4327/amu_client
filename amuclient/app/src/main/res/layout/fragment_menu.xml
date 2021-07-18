@@ -4,10 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.storeinfo.MenuFragment">
+    tools:context=".ui.main.view.storeinfo.MenuFragment">
 
-    <ListView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/menu_list"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         />
