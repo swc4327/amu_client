@@ -19,6 +19,8 @@ object RetrofitObject {
     val getReserveService : GetReserveService = retrofit.create(GetReserveService::class.java)
     val getStoreInfoService : GetStoreInfoService = retrofit.create(GetStoreInfoService::class.java)
     val addReviewService : AddReviewService = retrofit.create(AddReviewService::class.java)
+    val getReviewService : GetReviewListService = retrofit.create(GetReviewListService::class.java)
+    val getClientService : GetClientService = retrofit.create(GetClientService::class.java)
 
 //    val getStoreService: GetStoreService = retrofit.create(GetStoreService::class.java)
 //    val addStoreService : AddStoreService = retrofit.create(AddStoreService::class.java)
