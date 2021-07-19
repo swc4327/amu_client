@@ -1,5 +1,6 @@
 package com.awesome.amuclient.data.model.remote
 
+import AddReviewService
 import com.awesome.amuclient.data.api.service.*
 import com.awesome.amuclient.data.model.Constants
 import com.google.gson.GsonBuilder
@@ -17,6 +18,7 @@ object RetrofitObject {
     val signUpService : SignUpService = retrofit.create(SignUpService::class.java)
     val getReserveService : GetReserveService = retrofit.create(GetReserveService::class.java)
     val getStoreInfoService : GetStoreInfoService = retrofit.create(GetStoreInfoService::class.java)
+    val addReviewService : AddReviewService = retrofit.create(AddReviewService::class.java)
 
 //    val getStoreService: GetStoreService = retrofit.create(GetStoreService::class.java)
 //    val addStoreService : AddStoreService = retrofit.create(AddStoreService::class.java)

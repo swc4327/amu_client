@@ -1,3 +1,7 @@
 package com.awesome.amuclient.data.model
 
-data class ReserveList(val store: Store, val reserve: Reserve)
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
+data class ReserveList(val store: Store, val reserve: Reserve) : Parcelable
