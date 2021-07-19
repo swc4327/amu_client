@@ -38,5 +38,8 @@ class ReviewApi {
                         }
                     }
                 })
-}
+    }
+    fun getReview() {
+
+    }
 }

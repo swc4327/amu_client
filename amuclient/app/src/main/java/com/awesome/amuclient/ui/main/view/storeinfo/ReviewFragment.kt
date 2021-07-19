@@ -14,6 +14,7 @@ import com.awesome.amuclient.data.api.service.GetClientService
 import com.awesome.amuclient.data.api.service.GetReviewListService
 import com.awesome.amuclient.data.model.*
 import com.awesome.amuclient.ui.main.adapter.ReviewAdapter
+import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.gson.GsonBuilder
 import io.reactivex.Observable
@@ -95,7 +96,7 @@ class ReviewFragment : Fragment() {
                 reviewLists
             }
             .subscribe({ reviewLists ->
-                reviewAdapter = ReviewAdapter(requireContext(), reviewLists)
+                reviewAdapter = ReviewAdapter(reviewLists, Glide.with(this))
                 review_list.adapter = reviewAdapter
 
             }, {
