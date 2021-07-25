@@ -45,6 +45,29 @@ class MainActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         //auth.signOut()
 
+        initListener()
+
+    }
+
+    private fun initListener() {
+        menu_bar_1.setOnClickListener {
+            if (lat != null && lng != null) {
+                goKaraoke()
+            }
+        }
+
+        menu_bar_2.setOnClickListener {
+            if (lat != null && lng != null) {
+                goBaseball()
+            }
+        }
+
+        menu_bar_3.setOnClickListener {
+            if (lat != null && lng != null) {
+                goBowling()
+            }
+        }
+
         reserve_list.setOnClickListener {
             val intent = Intent(this, ReserveListActivity::class.java)
             startActivity(intent)
@@ -63,58 +86,48 @@ class MainActivity : AppCompatActivity() {
         set_place.setOnClickListener {
             getLocation()
         }
+    }
 
-        menu_bar_1.setOnClickListener {
-            if (lat != null && lng != null) {
-                menu_bar_1.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 25F)
-                menu_bar_2.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15F)
-                menu_bar_3.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15F)
-                supportFragmentManager.beginTransaction()
-                        .replace(R.id.store_list_area, KaraokeFragment().apply {
-                            arguments = Bundle().apply {
-                                putString("lat", lat.toString())
-                                putString("lng", lng.toString())
-                            }
-                        })
-                        .commit()
-            }
-        }
+    private fun goKaraoke() {
+        menu_bar_1.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 25F)
+        menu_bar_2.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15F)
+        menu_bar_3.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15F)
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.store_list_area, KaraokeFragment().apply {
+                arguments = Bundle().apply {
+                    putString("lat", lat.toString())
+                    putString("lng", lng.toString())
+                }
+            })
+            .commit()
+    }
 
-        menu_bar_2.setOnClickListener {
-            if (lat != null && lng != null) {
-                menu_bar_1.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15F)
-                menu_bar_2.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 25F)
-                menu_bar_3.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15F)
-                supportFragmentManager.beginTransaction()
-                        .replace(R.id.store_list_area, BaseBallFragment().apply {
-                            arguments = Bundle().apply {
-                                putString("lat", lat.toString())
-                                putString("lng", lng.toString())
-                            }
-                        })
-                        .commit()
-            }
-        }
+    private fun goBaseball() {
+        menu_bar_1.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15F)
+        menu_bar_2.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 25F)
+        menu_bar_3.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15F)
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.store_list_area, BaseBallFragment().apply {
+                arguments = Bundle().apply {
+                    putString("lat", lat.toString())
+                    putString("lng", lng.toString())
+                }
+            })
+            .commit()
+    }
 
-        menu_bar_3.setOnClickListener {
-            if (lat != null && lng != null) {
-                menu_bar_1.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15F)
-                menu_bar_2.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15F)
-                menu_bar_3.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 25F)
-                supportFragmentManager.beginTransaction()
-                        .replace(R.id.store_list_area, BowlingFragment().apply {
-                            arguments = Bundle().apply {
-                                putString("lat", lat.toString())
-                                putString("lng", lng.toString())
-                            }
-                        })
-                        .commit()
-            }
-        }
-
-
-
-        
+    private fun goBowling() {
+        menu_bar_1.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15F)
+        menu_bar_2.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15F)
+        menu_bar_3.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 25F)
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.store_list_area, BowlingFragment().apply {
+                arguments = Bundle().apply {
+                    putString("lat", lat.toString())
+                    putString("lng", lng.toString())
+                }
+            })
+            .commit()
     }
 
     private fun getLocation() {
@@ -146,18 +159,7 @@ class MainActivity : AppCompatActivity() {
                         lat = location.latitude
                         lng = location.longitude
 
-                        menu_bar_1.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 25F)
-                        menu_bar_2.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15F)
-                        menu_bar_3.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15F)
-
-                        supportFragmentManager.beginTransaction()
-                            .replace(R.id.store_list_area, KaraokeFragment().apply {
-                                arguments = Bundle().apply {
-                                    putString("lat", lat.toString())
-                                    putString("lng", lng.toString())
-                                }
-                            })
-                            .commit()
+                        goKaraoke()
 
                     }
                 }
@@ -168,54 +170,5 @@ class MainActivity : AppCompatActivity() {
             locationCallback,
             Looper.getMainLooper()
         )
-    }
-
-//        var fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
-//        fusedLocationClient.lastLocation
-//            .addOnSuccessListener { location ->
-//                if (location == null) {
-//                    Log.e("Get location test", "location get fail")
-//                } else {
-//                    Log.d("Get location test", "${location.latitude} , ${location.longitude}")
-//                    lat = location.latitude
-//                    lng = location.longitude
-//                    //getStoreList()
-//
-//                    menu_bar_1.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 25F)
-//                    menu_bar_2.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15F)
-//                    menu_bar_3.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15F)
-//
-//                    supportFragmentManager.beginTransaction()
-//                        .replace(R.id.store_list_area, KaraokeFragment().apply {
-//                            arguments = Bundle().apply {
-//                                putString("lat", lat.toString())
-//                                putString("lng", lng.toString())
-//                            }
-//                        })
-//                        .commit()
-//                }
-//            }
-//            .addOnFailureListener {
-//                Log.e("Get location test", "location error is ${it.message}")
-//                it.printStackTrace()
-//            }
-
-    fun getHashKey(){
-        var packageInfo : PackageInfo = PackageInfo()
-        try {
-            packageInfo = packageManager.getPackageInfo(packageName, PackageManager.GET_SIGNATURES)
-        } catch (e: PackageManager.NameNotFoundException){
-            e.printStackTrace()
-        }
-
-        for (signature: Signature in packageInfo.signatures){
-            try{
-                var md: MessageDigest = MessageDigest.getInstance("SHA")
-                md.update(signature.toByteArray())
-                Log.e("KEY_HASH", Base64.encodeToString(md.digest(), Base64.DEFAULT))
-            } catch(e: NoSuchAlgorithmException){
-                Log.e("KEY_HASH", "Unable to get MessageDigest. signature = " + signature, e)
-            }
-        }
     }
 }
