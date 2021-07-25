@@ -2,6 +2,7 @@ package com.awesome.amuclient.ui.main.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.awesome.amuclient.data.model.Reserve
 import com.awesome.amuclient.data.model.ReserveList
 import com.awesome.amuclient.data.model.remote.ReserveApi
 
@@ -13,6 +14,10 @@ class ReserveViewModel(private var clientId: String) : ViewModel() {
 
     fun getReserveList() {
         reserveApi.getReserveList(reserveLists, clientId)
+    }
+
+    fun addReserve(reserve: Reserve) {
+        reserveApi.addReserve(status, reserve)
     }
 
 }

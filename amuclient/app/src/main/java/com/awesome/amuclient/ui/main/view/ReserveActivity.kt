@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.os.Looper
 import android.util.Log
 import androidx.core.app.ActivityCompat
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.awesome.amuclient.R
 import com.awesome.amuclient.data.model.Constants
@@ -13,6 +14,8 @@ import com.awesome.amuclient.data.api.response.DefaultResponse
 import com.awesome.amuclient.data.api.service.AddReserveService
 import com.awesome.amuclient.data.model.Reserve
 import com.awesome.amuclient.ui.main.viewmodel.FirebaseViewModel
+import com.awesome.amuclient.ui.main.viewmodel.ReserveViewModel
+import com.awesome.amuclient.ui.main.viewmodel.ReserveViewModelFactory
 import com.awesome.amuclient.util.FirebaseUtils
 import com.google.android.gms.location.*
 import com.google.gson.GsonBuilder
@@ -30,6 +33,7 @@ class ReserveActivity : AppCompatActivity() {
     private var lng: Double? = null
 
     private lateinit var firebaseViewModel: FirebaseViewModel
+    private lateinit var reserveViewModel: ReserveViewModel
 
 
     private var fusedLocationClient : FusedLocationProviderClient? = null
@@ -51,64 +55,49 @@ class ReserveActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_reserve)
-
         storeId = intent.getStringExtra("storeId").toString()
 
         firebaseViewModel = ViewModelProvider(this).get(FirebaseViewModel::class.java)
 
+        var factory = ReserveViewModelFactory(firebaseViewModel.getUid())
+        reserveViewModel = ViewModelProvider(this, factory).get(ReserveViewModel::class.java)
+
+        initListener()
+        observe()
+    }
+
+    private fun observe() {
+        reserveViewModel.status.observe(this, Observer<Int> {
+            if(it == 200) {
+                finish()
+            }
+        })
+    }
+
+    private fun initListener() {
         close_reserve_page.setOnClickListener {
             finish()
         }
 
         complete_button.setOnClickListener {
-            addReserve()
-        }
-    }
-    private fun addReserve() {
-        val gson = GsonBuilder().setLenient().create()
-        val retrofit = Retrofit.Builder()
-            .baseUrl(Constants.serverUrl)
-            .addConverterFactory(GsonConverterFactory.create(gson))
-            .build()
-
-        val joinApi = retrofit.create(AddReserveService::class.java)
-
-        val reserve = Reserve(
-            null,
-            name.text.toString(),
-            phone.text.toString(),
-            arrive.text.toString(),
-            request.text.toString(),
-            lat.toString(),
-            lng.toString(),
-            null,
-            storeId,
-            firebaseViewModel.getUid(),
-            "0",
+            //addReserve()
+            val reserve = Reserve(
+                null,
+                name.text.toString(),
+                phone.text.toString(),
+                arrive.text.toString(),
+                request.text.toString(),
+                lat.toString(),
+                lng.toString(),
+                null,
+                storeId,
+                firebaseViewModel.getUid(),
                 "0",
-        "0")
+                "0",
+                "0")
 
-        joinApi.addReserve(reserve)
-            .enqueue(object : Callback<DefaultResponse> {
-
-                override fun onFailure(call: Call<DefaultResponse>, t: Throwable) {
-                    Log.e("Retrofit Reserve", "실패")
-                    Log.e("Check", t.toString())
-                }
-
-                override fun onResponse(
-                    call: Call<DefaultResponse>,
-                    response: Response<DefaultResponse>
-                ) {
-                    if (response.isSuccessful && response.body() != null && response.body()!!.code == 200) {
-                        Log.e("Add Reserve", "success")
-                        finish()
-
-                    } else {
-                        Log.e("AddReserve", "실패")
-                    }
-                }
-            })
+            reserveViewModel.addReserve(reserve)
+        }
     }
 
     private fun getLocation() {
@@ -146,41 +135,3 @@ class ReserveActivity : AppCompatActivity() {
         fusedLocationClient!!.requestLocationUpdates(locationReq, locationCallback,Looper.getMainLooper())
     }
 }
-
-
-
-//private fun addTransaction() {
-//        val gson = GsonBuilder().setLenient().create()
-//        val retrofit = Retrofit.Builder()
-//            .baseUrl(Constants.serverUrl)
-//            .addConverterFactory(GsonConverterFactory.create(gson))
-//            .build()
-//
-//        val joinApi = retrofit.create(AddTransactionService::class.java)
-//
-//
-//        val transaction = Transaction(null, null, 0, storeId, FirebaseUtils.getUid())
-//
-//        joinApi.addTransaction(transaction)
-//            .enqueue(object : Callback<DefaultResponse> {
-//
-//                override fun onFailure(call: Call<DefaultResponse>, t: Throwable) {
-//                    Log.e("Retrofit Transaction", "실패")
-//                    Log.e("Check", t.toString())
-//                }
-//
-//                override fun onResponse(
-//                    call: Call<DefaultResponse>,
-//                    response: Response<DefaultResponse>
-//                ) {
-//                    if (response.isSuccessful && response.body() != null && response.body()!!.code == 200) {
-//                        Log.e("Add Transaction", "success")
-//                        addReserve()
-//                        //getLocation()
-//
-//                    } else {
-//                        Log.e("Add Transaction", "실패")
-//                    }
-//                }
-//            })
-//    }

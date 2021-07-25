@@ -2,6 +2,7 @@ package com.awesome.amuclient.data.model.remote
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import com.awesome.amuclient.data.api.response.DefaultResponse
 import com.awesome.amuclient.data.api.response.ReserveResponse
 import com.awesome.amuclient.data.api.response.StoreResponse
 import com.awesome.amuclient.data.model.*
@@ -11,6 +12,35 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class ReserveApi {
+
+    fun addReserve(
+        status: MutableLiveData<Int>,
+        reserve: Reserve
+    ) {
+        val joinApi = RetrofitObject.addReserveService
+
+        joinApi.addReserve(reserve)
+            .enqueue(object : Callback<DefaultResponse> {
+
+                override fun onFailure(call: Call<DefaultResponse>, t: Throwable) {
+                    Log.e("Retrofit Reserve", "실패")
+                    Log.e("Check", t.toString())
+                }
+
+                override fun onResponse(
+                    call: Call<DefaultResponse>,
+                    response: Response<DefaultResponse>
+                ) {
+                    if (response.isSuccessful && response.body() != null && response.body()!!.code == 200) {
+                        Log.e("Add Reserve", "success")
+                        status.value = 200
+
+                    } else {
+                        Log.e("AddReserve", "실패")
+                    }
+                }
+            })
+    }
 
     fun getReserveList(
         ReserveLists: MutableLiveData<ArrayList<ReserveList>>,
