@@ -53,7 +53,8 @@ class ReserveListActivity : AppCompatActivity() {
                     startActivity(intent)
                 }, {reserveList ->
                     val intent = Intent(this, ReserveDetailActivity::class.java)
-                    intent.putExtra("reserveList", reserveList)
+                    intent.putExtra("reserve", reserveList.reserve)
+                    intent.putExtra("store", reserveList.store)
                     startActivity(intent)
                 }, {reserveList ->
                         when {

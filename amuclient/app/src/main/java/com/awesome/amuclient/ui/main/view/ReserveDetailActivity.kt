@@ -3,7 +3,10 @@ package com.awesome.amuclient.ui.main.view
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.awesome.amuclient.R
+import com.awesome.amuclient.data.model.Reserve
 import com.awesome.amuclient.data.model.ReserveList
+import com.awesome.amuclient.data.model.Store
+import com.awesome.amuclient.map.MapManager
 import kotlinx.android.synthetic.main.activity_reserve_detail.*
 import net.daum.mf.map.api.MapPOIItem
 import net.daum.mf.map.api.MapPoint
@@ -11,26 +14,33 @@ import net.daum.mf.map.api.MapView
 
 class ReserveDetailActivity : AppCompatActivity() {
 
-    private var reserveList : ReserveList? =null
-    private var mapView : MapView? = null
+    private var mapManager : MapManager? = null
+    private var store : Store? = null
+    private var reserve : Reserve? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_reserve_detail)
 
-        reserveList = intent.getParcelableExtra("reserveList")
+        reserve = intent.getParcelableExtra("reserve")
+        store = intent.getParcelableExtra("store")
+
+        mapManager = MapManager(this)
+        mapManager?.addMapListener(info_map_view)
+        store?.lat?.toDouble()?.let {lat->
+            store?.lng?.toDouble()?.let {lng ->
+                mapManager?.setMap("업체위치", lat, lng) }
+        }
 
         initLayout()
         initListener()
-        setMap()
-        setLocation()
     }
 
     private fun initLayout() {
-        detail_store_name.setText(reserveList!!.store.name)
-        detail_store_place.setText(reserveList!!.store.place)
-        detail_store_place_detail.setText(reserveList!!.store.place_detail)
-        detail_date.setText(reserveList!!.reserve.date)
+        detail_store_name.text = store?.name
+        detail_store_place.text = store?.place
+        detail_store_place_detail.text = store?.place_detail
+        detail_date.text = reserve?.date
     }
 
     private fun initListener() {
@@ -40,64 +50,7 @@ class ReserveDetailActivity : AppCompatActivity() {
 
         detail_reserve_cancel_button.setOnClickListener {
             //구현해야함//
-
-
-
             finish()
         }
-    }
-
-    private fun setMap() {
-        mapView = MapView(this)
-        mapView!!.setMapViewEventListener(object : MapView.MapViewEventListener {
-            override fun onMapViewDoubleTapped(p0: MapView?, p1: MapPoint?) {
-                println("onMapViewDoubleTapped")
-            }
-
-            override fun onMapViewInitialized(p0: MapView?) {
-                println("onMapViewInitialized")
-            }
-
-            override fun onMapViewDragStarted(p0: MapView?, p1: MapPoint?) {
-                println("onMapViewDragStarted")
-            }
-
-            override fun onMapViewMoveFinished(p0: MapView?, p1: MapPoint?) {
-                println("onMapViewMoveFinished")
-            }
-
-            override fun onMapViewCenterPointMoved(p0: MapView?, p1: MapPoint?) {
-                println("onMapViewCetnerPointMoved")
-            }
-
-            override fun onMapViewDragEnded(p0: MapView?, p1: MapPoint?) {
-                println("onMapViewDragEnded")
-            }
-
-            override fun onMapViewSingleTapped(p0: MapView?, p1: MapPoint?) {
-                println("onMapViewSingleTapped")
-            }
-
-            override fun onMapViewZoomLevelChanged(p0: MapView?, p1: Int) {
-                println("onMapViewZoomLevelChanged")
-            }
-
-            override fun onMapViewLongPressed(p0: MapView?, p1: MapPoint?) {
-                println("onMapViewLongPressed")
-            }
-
-        })
-        info_map_view.addView(mapView)
-
-    }
-
-    private fun setLocation() {
-        mapView!!.setMapCenterPoint(reserveList!!.store.lat?.toDouble()?.let {lat-> reserveList!!.store.lng?.toDouble()?.let {lng -> MapPoint.mapPointWithGeoCoord(lat, lng) } },true)
-        var marker = MapPOIItem()
-        marker.setItemName("업체위치")
-        marker.setTag(0)
-        marker.setMapPoint(reserveList!!.store.lat?.toDouble()?.let {lat-> reserveList!!.store.lng?.toDouble()?.let {lng-> MapPoint.mapPointWithGeoCoord(lat, lng) } })
-        marker.setMarkerType(MapPOIItem.MarkerType.BluePin)
-        mapView!!.addPOIItem(marker)
     }
 }
