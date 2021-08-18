@@ -92,13 +92,12 @@ class ReserveDetailActivity : AppCompatActivity() {
     }
 
     private fun setLocation() {
-        mapView!!.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(reserveList!!.store.lat.toDouble(), reserveList!!.store.lng.toDouble()),true)
+        mapView!!.setMapCenterPoint(reserveList!!.store.lat?.toDouble()?.let {lat-> reserveList!!.store.lng?.toDouble()?.let {lng -> MapPoint.mapPointWithGeoCoord(lat, lng) } },true)
         var marker = MapPOIItem()
         marker.setItemName("업체위치")
         marker.setTag(0)
-        marker.setMapPoint(MapPoint.mapPointWithGeoCoord(reserveList!!.store.lat.toDouble(), reserveList!!.store.lng.toDouble()))
+        marker.setMapPoint(reserveList!!.store.lat?.toDouble()?.let {lat-> reserveList!!.store.lng?.toDouble()?.let {lng-> MapPoint.mapPointWithGeoCoord(lat, lng) } })
         marker.setMarkerType(MapPOIItem.MarkerType.BluePin)
-        //marker.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin); // 마커를 클릭했을때, 기본으로 제공하는 RedPin 마커 모양.
         mapView!!.addPOIItem(marker)
     }
 }

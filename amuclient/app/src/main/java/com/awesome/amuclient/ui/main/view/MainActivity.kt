@@ -24,6 +24,15 @@ import java.security.NoSuchAlgorithmException
 
 class MainActivity : AppCompatActivity() {
 
+
+    companion object {
+        fun startActivity(activity : AppCompatActivity) {
+            val intent = Intent(activity, MainActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            activity.startActivity(intent)
+        }
+    }
+
     private lateinit var auth: FirebaseAuth
     private var lat: Double? = null
     private var lng: Double? = null
@@ -34,7 +43,7 @@ class MainActivity : AppCompatActivity() {
     override fun onPause() {
         super.onPause()
             if(fusedLocationClient != null) {
-                fusedLocationClient!!.removeLocationUpdates(locationCallback)
+                fusedLocationClient?.removeLocationUpdates(locationCallback)
             }
 
     }

@@ -3,18 +3,51 @@ package com.awesome.amuclient.ui.main.viewmodel
 import android.graphics.drawable.BitmapDrawable
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.awesome.amuclient.util.FirebaseUtils
+import com.awesome.amuclient.firebase.FirebaseAuthManager
+import com.awesome.amuclient.firebase.FirebaseDatabaseManager
+import com.awesome.amuclient.firebase.FirebaseStorageManager
 
 class FirebaseViewModel() : ViewModel() {
-    private val firebaseUtils = FirebaseUtils()
-    //val status = MutableLiveData<Int>()
     val taskToString = MutableLiveData<String>()
+    val status = MutableLiveData<Int>()
+    val nickname = MutableLiveData<String>()
+
+    fun signUp(email : String, password: String) {
+        FirebaseAuthManager.signUp(email, password, status)
+    }
+
+    fun signIn(email : String, password: String) {
+        FirebaseAuthManager.signIn(email, password, status)
+    }
 
     fun getUid() : String {
-        return firebaseUtils.getUid()
+        return FirebaseAuthManager.getUid()
     }
 
-    fun uploadTask(bitmapDrawable: BitmapDrawable, stringValue: String) {
-        firebaseUtils.uploadTask(bitmapDrawable, stringValue, taskToString)
+    fun logout() {
+        FirebaseAuthManager.logout()
     }
+
+    fun isLoggedIn(): Boolean {
+        return FirebaseAuthManager.isLoggedIn()
+    }
+
+    ////////////////////////////////////////////
+
+
+    fun addDatabase(collectionPath : String, filed : String, value : String) {
+        FirebaseDatabaseManager.addDatabase(collectionPath, filed, value, status)
+    }
+
+    fun getDatabase(collectionPath: String) {
+        FirebaseDatabaseManager.getDatabase(collectionPath, nickname)
+    }
+
+    /////////////////////////////////////////////
+
+    fun uploadTask(bitmapDrawable: BitmapDrawable, stringValue: String) {
+        FirebaseStorageManager.uploadTask(bitmapDrawable, stringValue, taskToString)
+    }
+
+
 }

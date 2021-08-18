@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.awesome.amuclient.R
 import com.awesome.amuclient.ui.main.viewmodel.FirebaseViewModel
@@ -17,8 +18,13 @@ import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.activity_my_page.*
 
 class MyPageActivity : AppCompatActivity() {
-    private val db = FirebaseFirestore.getInstance()
-    private lateinit var auth : FirebaseAuth
+
+    companion object {
+        fun startActivity(activity : AppCompatActivity) {
+            val intent = Intent(activity, MyPageActivity::class.java)
+            activity.startActivity(intent)
+        }
+    }
 
     private lateinit var firebaseViewModel : FirebaseViewModel
 
@@ -28,21 +34,24 @@ class MyPageActivity : AppCompatActivity() {
 
         firebaseViewModel = ViewModelProvider(this).get(FirebaseViewModel::class.java)
 
-        auth = FirebaseAuth.getInstance()
+        firebaseViewModel = ViewModelProvider(this).get(FirebaseViewModel::class.java)
 
         setProfileName()
         setProfileImage()
         initListener()
+        observe()
 
     }
 
-    private fun setProfileName() {
-        val docRef = db.collection("clients")
-            .document(auth.currentUser?.uid.toString())
+    private fun observe() {
+        firebaseViewModel.nickname.observe(this, Observer<String> { nickname ->
+            nickname_area.text = nickname
+        })
+    }
 
-        docRef.get().addOnSuccessListener { documentSnapshot ->
-            nickname_area.setText(documentSnapshot.get("nickname").toString())
-        }
+    private fun setProfileName() {
+        firebaseViewModel.getDatabase("clients")
+
     }
 
     private fun setProfileImage() {
@@ -66,15 +75,12 @@ class MyPageActivity : AppCompatActivity() {
 
     private fun initListener() {
         mypage_logout_button.setOnClickListener {
-            auth.signOut()
-            val intent = Intent(this, MainActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            startActivity(intent)
+            firebaseViewModel.logout()
+            MainActivity.startActivity(this)
         }
 
         mypage_promotion_button.setOnClickListener {
             val intent = Intent(this, PromotionActivity::class.java)
-            //intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)
         }
 
