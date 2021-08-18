@@ -9,11 +9,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.awesome.amuclient.R
 import com.awesome.amuclient.ui.main.viewmodel.FirebaseViewModel
-import com.awesome.amuclient.util.FirebaseUtils
 import com.bumptech.glide.Glide
 import com.google.android.gms.tasks.OnCompleteListener
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.activity_my_page.*
 

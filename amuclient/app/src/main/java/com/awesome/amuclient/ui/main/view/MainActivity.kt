@@ -11,10 +11,12 @@ import android.util.Base64
 import android.util.Log
 import android.util.TypedValue
 import androidx.core.app.ActivityCompat
+import androidx.lifecycle.ViewModelProvider
 import com.awesome.amuclient.R
 import com.awesome.amuclient.ui.main.view.storelist.BaseBallFragment
 import com.awesome.amuclient.ui.main.view.storelist.BowlingFragment
 import com.awesome.amuclient.ui.main.view.storelist.KaraokeFragment
+import com.awesome.amuclient.ui.main.viewmodel.FirebaseViewModel
 import com.google.android.gms.location.*
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_main.*
@@ -24,6 +26,13 @@ import java.security.NoSuchAlgorithmException
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var firebaseViewModel : FirebaseViewModel
+
+    private var fusedLocationClient : FusedLocationProviderClient? = null
+    private var locationCallback: LocationCallback? = null
+
+    private var lat: Double? = null
+    private var lng: Double? = null
 
     companion object {
         fun startActivity(activity : AppCompatActivity) {
@@ -32,13 +41,6 @@ class MainActivity : AppCompatActivity() {
             activity.startActivity(intent)
         }
     }
-
-    private lateinit var auth: FirebaseAuth
-    private var lat: Double? = null
-    private var lng: Double? = null
-
-    private var fusedLocationClient : FusedLocationProviderClient? = null
-    private var locationCallback: LocationCallback? = null
 
     override fun onPause() {
         super.onPause()
@@ -51,9 +53,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        auth = FirebaseAuth.getInstance()
-        //auth.signOut()
 
+        firebaseViewModel = ViewModelProvider(this).get(FirebaseViewModel::class.java)
         initListener()
 
     }
@@ -83,7 +84,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         my_page.setOnClickListener {
-            if (auth.currentUser == null) { //로그인 no
+            if (!firebaseViewModel.isLoggedIn()) { //로그인 no
                 val intent = Intent(this, LoginActivity::class.java)
                 startActivity(intent)
             } else { //로그인 ok

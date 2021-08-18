@@ -81,11 +81,7 @@ class StoreInfoActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_area, InfoFragment().apply {
                 arguments = Bundle().apply {
-                    putString("store_id", store!!.id.toString())
-                    putString("lat", store!!.lat)
-                    putString("lng", store!!.lng)
-                    putString("place", store!!.place)
-                    putString("place_detail", store!!.place_detail)
+                    putParcelable("store", store)
                 }
             })
             .commit()
