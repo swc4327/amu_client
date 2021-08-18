@@ -99,58 +99,6 @@ class ReviewActivity : AppCompatActivity() {
         }
     }
 
-//    private fun addReview() {
-//        val bitmap = (add_image.drawable as BitmapDrawable).bitmap
-//        val baos = ByteArrayOutputStream()
-//        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
-//        val data = baos.toByteArray()
-//
-//        var task = FirebaseStorage.getInstance().getReference()
-//                .child(firebaseViewModel.getUid() + storeName + "_review")
-//        val uploadTask = task.putBytes(data)
-//
-//        uploadTask.addOnFailureListener {
-//            Toast.makeText(this, "업로드실패", Toast.LENGTH_LONG).show()
-//
-//        }
-//                .addOnSuccessListener {
-//                    Toast.makeText(this, "업로드성공", Toast.LENGTH_LONG).show()
-//
-//                    task.downloadUrl.addOnCompleteListener { task ->
-//                        val review: Review = Review(null, task.result.toString(),
-//                                review_comment.text.toString(), null, storeId, firebaseViewModel.getUid(), rbPoint.text.toString(), reserveId)
-//
-//                        val gson = GsonBuilder().setLenient().create()
-//                        val retrofit = Retrofit.Builder()
-//                                .baseUrl(Constants.serverUrl)
-//                                .addConverterFactory(GsonConverterFactory.create(gson))
-//                                .build()
-//
-//                        val joinApi = retrofit.create(AddReviewService::class.java)
-//                        joinApi.addReview(review)
-//                                .enqueue(object : Callback<DefaultResponse> {
-//
-//                                    override fun onFailure(call: Call<DefaultResponse>, t: Throwable) {
-//                                        Log.e("retrofit add review", "실패")
-//                                        Log.e("Check", t.toString())
-//                                    }
-//
-//                                    override fun onResponse(
-//                                            call: Call<DefaultResponse>,
-//                                            response: Response<DefaultResponse>
-//                                    )  {
-//                                        if (response.isSuccessful && response.body() != null && response.body()!!.code == 200) {
-//                                            Log.e("ReviewActivity", "success")
-//                                            finish()
-//
-//                                        } else {
-//                                            Log.e("ReviewActivity", "실패")
-//                                        }
-//                                    }
-//                                })
-//                    }
-//                }
-//    }
     companion object {
         //image pick code
         private val IMAGE_PICK_CODE = 1000;
