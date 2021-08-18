@@ -12,7 +12,7 @@ class StoreApi {
 
     fun getStore(stores: MutableLiveData<ArrayList<Store>>, storesTemp: ArrayList<Store>, lat: String, lng: String, kind: String) {
 
-        val joinApi = RetrofitObject.getStoreService
+        val joinApi = RetrofitObject.storeService
 
         joinApi.getStore(lat.toString(),lng.toString(), kind)
 

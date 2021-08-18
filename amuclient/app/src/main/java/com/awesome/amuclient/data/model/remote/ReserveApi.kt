@@ -17,7 +17,7 @@ class ReserveApi {
         status: MutableLiveData<Int>,
         reserve: Reserve
     ) {
-        val joinApi = RetrofitObject.addReserveService
+        val joinApi = RetrofitObject.reserveService
 
         joinApi.addReserve(reserve)
             .enqueue(object : Callback<DefaultResponse> {
@@ -49,7 +49,7 @@ class ReserveApi {
 
         var reservesTemp = ArrayList<Reserve>()
 
-        val joinApi = RetrofitObject.getReserveService
+        val joinApi = RetrofitObject.reserveService
 
         joinApi.getReserveList(clientId)
                 .enqueue(object : Callback<ReserveResponse> {
@@ -106,7 +106,7 @@ class ReserveApi {
 
     private fun getStore(storeId: String): Observable<Store> {
         return Observable.create { emitter ->
-            val joinApi = RetrofitObject.getStoreInfoService
+            val joinApi = RetrofitObject.storeService
             joinApi.getStoreInfo(storeId)
                 .enqueue(object : Callback<StoreResponse> {
 

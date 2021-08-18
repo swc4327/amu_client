@@ -3,24 +3,15 @@ package com.awesome.amuclient.ui.main.view
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.awesome.amuclient.R
-import com.awesome.amuclient.data.api.response.StoreResponse
-import com.awesome.amuclient.data.api.service.GetStoreInfoService
 import com.awesome.amuclient.data.model.*
 import com.awesome.amuclient.ui.main.adapter.PromotionAdapter
 import com.awesome.amuclient.ui.main.viewmodel.FirebaseViewModel
 import com.awesome.amuclient.ui.main.viewmodel.PromotionViewModel
 import com.bumptech.glide.Glide
-import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.activity_promotion.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 class PromotionActivity : AppCompatActivity() {
 

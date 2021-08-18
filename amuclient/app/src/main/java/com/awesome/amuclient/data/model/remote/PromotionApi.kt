@@ -21,7 +21,7 @@ class PromotionApi {
 
         var storeIds = ArrayList<StoreId>()
 
-        val joinApi = RetrofitObject.getStoreForPromotionService
+        val joinApi = RetrofitObject.storeService
 
         joinApi.getStoreForPromotion(clientId)
                 .enqueue(object : Callback<StoreForPromotionResponse> {
@@ -57,7 +57,7 @@ class PromotionApi {
         var promotionsTemp = ArrayList<Promotion>()
 
         if(storeIds.size != 0) {
-            val joinApi = RetrofitObject.getPromotionListService
+            val joinApi = RetrofitObject.promotionService
             for (i in 0 until storeIds.size) {
                 joinApi.getPromotionList(storeIds[i].store_id.toString())
                         .enqueue(object : Callback<PromotionListResponse> {
@@ -118,7 +118,7 @@ class PromotionApi {
 
     private fun getStore(storeId: String): Observable<Store> {
         return Observable.create { emitter ->
-            val joinApi = RetrofitObject.getStoreInfoService
+            val joinApi = RetrofitObject.storeService
             joinApi.getStoreInfo(storeId)
                 .enqueue(object : Callback<StoreResponse> {
 

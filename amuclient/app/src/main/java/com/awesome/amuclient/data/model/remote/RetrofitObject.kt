@@ -1,6 +1,5 @@
 package com.awesome.amuclient.data.model.remote
 
-import AddReviewService
 import com.awesome.amuclient.data.api.service.*
 import com.awesome.amuclient.data.model.Constants
 import com.google.gson.GsonBuilder
@@ -13,30 +12,11 @@ object RetrofitObject {
             .addConverterFactory(GsonConverterFactory.create(GsonBuilder().setLenient().create()))
             .build()
 
-    val getStoreService : GetStoreService = retrofit.create(GetStoreService::class.java)
-    val getMenuService : GetMenuService = retrofit.create(GetMenuService::class.java)
-    val signUpService : SignUpService = retrofit.create(SignUpService::class.java)
-    val getReserveService : GetReserveService = retrofit.create(GetReserveService::class.java)
-    val getStoreInfoService : GetStoreInfoService = retrofit.create(GetStoreInfoService::class.java)
-    val addReviewService : AddReviewService = retrofit.create(AddReviewService::class.java)
-    val getReviewService : GetReviewListService = retrofit.create(GetReviewListService::class.java)
-    val getClientService : GetClientService = retrofit.create(GetClientService::class.java)
-    val getStoreForPromotionService : GetStoreForPromotionService = retrofit.create(GetStoreForPromotionService::class.java)
-    val getPromotionListService : GetPromotionListService = retrofit.create(GetPromotionListService::class.java)
-    val addReserveService : AddReserveService = retrofit.create(AddReserveService::class.java)
+    val storeService : StoreService = retrofit.create(StoreService::class.java)
+    val reviewService : ReviewService = retrofit.create(ReviewService::class.java)
+    val reserveService : ReserveService = retrofit.create(ReserveService::class.java)
+    val menuService : MenuService = retrofit.create(MenuService::class.java)
+    val promotionService : PromotionService = retrofit.create(PromotionService::class.java)
+    val clientService : ClientService = retrofit.create(ClientService::class.java)
 
-//    val getStoreService: GetStoreService = retrofit.create(GetStoreService::class.java)
-//    val addStoreService : AddStoreService = retrofit.create(AddStoreService::class.java)
-//    val addMenuService : AddMenuService = retrofit.create(AddMenuService::class.java)
-//    val addPromotionService : AddPromotionService = retrofit.create(AddPromotionService::class.java)
-//    val getClientService : GetClientService = retrofit.create(GetClientService::class.java)
-//    val getMenuService : GetMenuService = retrofit.create(GetMenuService::class.java)
-//    val getPromotionService : GetPromotionService = retrofit.create(GetPromotionService::class.java)
-//    val getReserveService : GetReserveService = retrofit.create(GetReserveService::class.java)
-//    val getReviewService : GetReviewService = retrofit.create(GetReviewService::class.java)
-//    val reviewFilteringService : ReviewFilteringService = retrofit.create(ReviewFilteringService::class.java)
-//    val signUpService : SignUpService = retrofit.create(SignUpService::class.java)
-//    val confirmReserveService : ConfirmReserveService = retrofit.create(ConfirmReserveService::class.java)
-//    val cancelReserveService : CancelReserveService = retrofit.create(CancelReserveService::class.java)
-//    val completeReserveService : CompleteReserveService = retrofit.create(CompleteReserveService::class.java)
 }

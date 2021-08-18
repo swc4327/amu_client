@@ -4,9 +4,7 @@ import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
-import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -15,26 +13,12 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.awesome.amuclient.R
-import com.awesome.amuclient.data.model.Constants
-import com.awesome.amuclient.data.api.response.DefaultResponse
-import com.awesome.amuclient.data.api.service.SignUpService
 import com.awesome.amuclient.data.model.Client
 import com.awesome.amuclient.ui.main.viewmodel.ClientViewModel
 import com.awesome.amuclient.ui.main.viewmodel.FirebaseViewModel
-import com.awesome.amuclient.util.FirebaseUtils
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.storage.FirebaseStorage
-import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.activity_join_info.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import java.io.ByteArrayOutputStream
 
 class JoinInfoActivity : AppCompatActivity() {
     private lateinit var auth : FirebaseAuth

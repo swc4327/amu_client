@@ -12,7 +12,7 @@ class ClientApi {
 
     fun addClient(client: Client, status: MutableLiveData<Int>) {
 
-        val joinApi = RetrofitObject.signUpService
+        val joinApi = RetrofitObject.clientService
 
 
         joinApi.addClient(client)

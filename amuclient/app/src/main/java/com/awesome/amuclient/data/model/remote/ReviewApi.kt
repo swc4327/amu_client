@@ -20,7 +20,7 @@ class ReviewApi {
         review: Review
     ) {
 
-        val joinApi = RetrofitObject.addReviewService
+        val joinApi = RetrofitObject.reviewService
 
 
         joinApi.addReview(review)
@@ -50,7 +50,7 @@ class ReviewApi {
     ) {
         var reviewsTemp = ArrayList<Review>()
 
-        val joinApi = RetrofitObject.getReviewService
+        val joinApi = RetrofitObject.reviewService
         joinApi.getReviewList(storeId.toString())
             .enqueue(object : Callback<ReviewListResponse> {
 
@@ -107,7 +107,7 @@ class ReviewApi {
 
     private fun getClient(clientId: String): Observable<Client> {
         return Observable.create { emitter ->
-            val joinApi = RetrofitObject.getClientService
+            val joinApi = RetrofitObject.clientService
             joinApi.getClient(clientId)
                 .enqueue(object : Callback<ClientResponse> {
 

@@ -15,7 +15,7 @@ class MenuApi {
         storeId: String
     ) {
 
-        val joinApi = RetrofitObject.getMenuService
+        val joinApi = RetrofitObject.menuService
 
         joinApi.getMenuList(storeId.toString())
             .enqueue(object : Callback<MenuResponse> {

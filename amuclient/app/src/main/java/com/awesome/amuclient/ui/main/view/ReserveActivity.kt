@@ -4,27 +4,16 @@ import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Looper
-import android.util.Log
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.awesome.amuclient.R
-import com.awesome.amuclient.data.model.Constants
-import com.awesome.amuclient.data.api.response.DefaultResponse
-import com.awesome.amuclient.data.api.service.AddReserveService
 import com.awesome.amuclient.data.model.Reserve
 import com.awesome.amuclient.ui.main.viewmodel.FirebaseViewModel
 import com.awesome.amuclient.ui.main.viewmodel.ReserveViewModel
 import com.awesome.amuclient.ui.main.viewmodel.ReserveViewModelFactory
-import com.awesome.amuclient.util.FirebaseUtils
 import com.google.android.gms.location.*
-import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.activity_reserve.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 class ReserveActivity : AppCompatActivity() {
 
