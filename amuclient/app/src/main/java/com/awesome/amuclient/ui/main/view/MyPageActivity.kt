@@ -77,8 +77,7 @@ class MyPageActivity : AppCompatActivity() {
         }
 
         mypage_promotion_button.setOnClickListener {
-            val intent = Intent(this, PromotionActivity::class.java)
-            startActivity(intent)
+            PromotionActivity.startActivity(this)
         }
 
         close_my_page.setOnClickListener {

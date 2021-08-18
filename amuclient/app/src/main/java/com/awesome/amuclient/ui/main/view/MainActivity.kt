@@ -47,7 +47,6 @@ class MainActivity : AppCompatActivity() {
             if(fusedLocationClient != null) {
                 fusedLocationClient?.removeLocationUpdates(locationCallback)
             }
-
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,7 +55,6 @@ class MainActivity : AppCompatActivity() {
 
         firebaseViewModel = ViewModelProvider(this).get(FirebaseViewModel::class.java)
         initListener()
-
     }
 
     private fun initListener() {
@@ -79,17 +77,14 @@ class MainActivity : AppCompatActivity() {
         }
 
         reserve_list.setOnClickListener {
-            val intent = Intent(this, ReserveListActivity::class.java)
-            startActivity(intent)
+            ReserveListActivity.startActivity(this)
         }
 
         my_page.setOnClickListener {
             if (!firebaseViewModel.isLoggedIn()) { //로그인 no
-                val intent = Intent(this, LoginActivity::class.java)
-                startActivity(intent)
+                LoginActivity.startActivity(this)
             } else { //로그인 ok
-                val intent = Intent(this, MyPageActivity::class.java)
-                startActivity(intent)
+                MyPageActivity.startActivity(this)
             }
         }
 

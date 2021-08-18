@@ -18,11 +18,16 @@ import kotlinx.android.synthetic.main.activity_reserve_list.*
 class ReserveListActivity : AppCompatActivity() {
 
     private var reserveListAdapter: ReserveListAdapter? = null
-
     private lateinit var firebaseViewModel: FirebaseViewModel
     private lateinit var reserveViewModel: ReserveViewModel
-
     private var clientId = ""
+
+    companion object {
+        fun startActivity(activity : AppCompatActivity) {
+            val intent = Intent(activity, ReserveListActivity::class.java)
+            activity.startActivity(intent)
+        }
+    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,7 +40,6 @@ class ReserveListActivity : AppCompatActivity() {
         clientId = firebaseViewModel.getUid()
         var factory = ReserveViewModelFactory(clientId.toString())
         reserveViewModel = ViewModelProvider(this, factory).get(ReserveViewModel::class.java)
-
 
         observe()
 

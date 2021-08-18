@@ -17,8 +17,14 @@ class PromotionActivity : AppCompatActivity() {
 
     private lateinit var firebaseViewModel : FirebaseViewModel
     private lateinit var promotionViewModel : PromotionViewModel
-
     private var promotionAdapter: PromotionAdapter? = null
+    
+    companion object {
+        fun startActivity(activity : AppCompatActivity) {
+            val intent = Intent(activity, PromotionActivity::class.java)
+            activity.startActivity(intent)
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
