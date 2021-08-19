@@ -8,16 +8,11 @@ import kotlinx.android.synthetic.main.item_menu.view.*
 
 class MenuViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
 
-    private val menuName = itemView.menu_name
-    private val menuImage = itemView.menu_image
-    private val menuComment = itemView.menu_comment
-    private val menuPrice = itemView.menu_price
-
     fun bind(menu : Menu, requestManager : RequestManager) {
-        menuName.text = menu.name
-        requestManager.load(menu.image).circleCrop().into(menuImage)
-        menuComment.text = menu.comment
-        menuPrice.text = menu.price
+        itemView.menu_name.text = menu.name
+        requestManager.load(menu.image).circleCrop().into(itemView.menu_image)
+        itemView.menu_comment.text = menu.comment
+        itemView.menu_price.text = menu.price
     }
 }
 

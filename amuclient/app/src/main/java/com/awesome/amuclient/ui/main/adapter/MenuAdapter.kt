@@ -23,4 +23,41 @@ class MenuAdapter(private val menus : ArrayList<Menu>,
     override fun onBindViewHolder(holder: MenuViewHolder, position: Int) {
         holder.bind(menus[position], requestManager)
     }
+
+    fun clearMenus() {
+        if(this.menus.isNotEmpty()) {
+            this.menus.clear()
+            notifyDataSetChanged()
+        }
+    }
+
+    fun getLastMenuId(position: Int) : String {
+        return this.menus[position].id.toString()
+    }
+
+    fun update(menus: ArrayList<Menu>) {
+        val endPosition = this.menus.size
+
+        if(endPosition < menus.size) {
+            loadMore(menus, endPosition)
+        }
+    }
+
+    private fun loadMore(
+            menus: ArrayList<Menu>,
+            endPosition: Int
+    ) {
+
+        if (this.menus.isEmpty()) {
+            this.menus.addAll(menus)
+        } else {
+            for (index in endPosition until menus.size) {
+                this.menus.add(index, menus[index])
+            }
+        }
+
+        notifyItemRangeInserted(endPosition, this.menus.size - endPosition)
+
+    }
+
 }

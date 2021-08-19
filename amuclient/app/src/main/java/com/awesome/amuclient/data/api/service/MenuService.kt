@@ -10,5 +10,5 @@ interface MenuService {
     @Headers("accept: application/json",
             "content-type: application/json")
     @GET("/getMenuList")
-    fun getMenuList(@Query("store_id") store_id:String) : Call<MenuResponse>
+    fun getMenuList(@Query("store_id") store_id:String, @Query("lastId") lastId:String) : Call<MenuResponse>
 }
