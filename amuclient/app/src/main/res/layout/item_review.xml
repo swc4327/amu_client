@@ -21,7 +21,7 @@
             <ImageView
                 android:id="@+id/client_image"
                 android:layout_marginTop="15dp"
-                android:src="@drawable/noimage"
+                android:src="@drawable/no_image"
                 android:layout_width="45dp"
                 android:layout_height="45dp"/>
 
@@ -70,7 +70,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/noimage" />
+                android:src="@drawable/no_image" />
 
             <TextView
                 android:id="@+id/comment"

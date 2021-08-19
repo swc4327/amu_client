@@ -54,7 +54,7 @@
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/add_image"
         android:layout_gravity="center"
-        android:src="@drawable/noimage"
+        android:src="@drawable/no_image"
         android:layout_width="100dp"
         android:layout_height="100dp"
         app:layout_constraintLeft_toLeftOf="parent"
