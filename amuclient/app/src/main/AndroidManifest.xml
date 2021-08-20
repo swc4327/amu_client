@@ -17,8 +17,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Amuclient"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.main.view.ReviewActivity"></activity>
-        <activity android:name=".ui.main.view.PromotionActivity" />
+        <activity android:name=".ui.main.view.ReviewDetailActivity"></activity>
+        <activity android:name=".ui.main.view.ReviewActivity" />
+        <activity android:name=".ui.main.view.VisitedStoreActivity" />
         <activity android:name=".ui.main.view.ReserveListActivity" />
         <activity android:name=".ui.main.view.ReserveDetailActivity" />
         <activity android:name=".ui.main.view.ReserveActivity" />

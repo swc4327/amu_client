@@ -11,7 +11,11 @@ class StoreViewModel() : ViewModel() {
     private var storesTemp = ArrayList<Store>()
     val status = MutableLiveData<Int>()
 
-    fun getStore(lat : String?, lng: String?, kind: String) {
-        storeApi.getStore(stores, storesTemp, lat!!, lng!!, kind)
+    fun getStore(lat : String?, lng: String?, kind: String, lastId : String) {
+        storeApi.getStore(stores, storesTemp, lat!!, lng!!, kind, lastId)
+    }
+
+    fun getVisitedStore(clientId : String) {
+        storeApi.getVisitedStore(clientId, stores, storesTemp)
     }
 }

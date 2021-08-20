@@ -1,6 +1,6 @@
 package com.awesome.amuclient.data.api.service
 
-import com.awesome.amuclient.data.api.response.PromotionListResponse
+import com.awesome.amuclient.data.api.response.PromotionResponse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Headers
@@ -11,5 +11,5 @@ interface PromotionService {
             "content-type: application/json")
 
     @GET("/getPromotionList")
-    fun getPromotionList(@Query("store_id") store_id:String) : Call<PromotionListResponse>
+    fun getPromotionList(@Query("store_id") store_id:String) : Call<PromotionResponse>
 }

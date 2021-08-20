@@ -60,9 +60,9 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
-        android:id="@+id/mypage_promotion_button"
+        android:id="@+id/show_visited_store"
         app:layout_constraintTop_toBottomOf="@id/profile_area"
-        android:text="프로모션 확인하기"
+        android:text="방문한 업체 확인하기"
         android:textColor="#ffffff"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -70,7 +70,7 @@
 
     <Button
         android:id="@+id/mypage_logout_button"
-        app:layout_constraintTop_toBottomOf="@id/mypage_promotion_button"
+        app:layout_constraintTop_toBottomOf="@id/show_visited_store"
         android:text="로그아웃"
         android:textColor="#ffffff"
         android:layout_width="match_parent"

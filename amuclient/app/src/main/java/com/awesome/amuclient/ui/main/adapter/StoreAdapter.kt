@@ -26,9 +26,29 @@ class StoreAdapter(private val stores : ArrayList<Store>,
         holder.bind(stores[position], requestManager)
     }
 
+    fun getLastStoreId(position : Int) : String {
+        return this.stores[position].id.toString()
+    }
+
+    fun clearStores() {
+        if(this.stores.isNotEmpty()) {
+            this.stores.clear()
+            notifyDataSetChanged()
+        }
+    }
+
     fun update(stores: ArrayList<Store>) {
         val endPosition = this.stores.size
 
+        if(endPosition < stores.size) {
+            loadMore(stores, endPosition)
+        }
+    }
+
+    private fun loadMore(
+        stores: ArrayList<Store>,
+        endPosition: Int
+    ) {
         if (this.stores.isEmpty()) {
             this.stores.addAll(stores)
         } else {

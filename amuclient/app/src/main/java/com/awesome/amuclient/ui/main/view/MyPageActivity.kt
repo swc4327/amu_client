@@ -76,8 +76,8 @@ class MyPageActivity : AppCompatActivity() {
             MainActivity.startActivity(this)
         }
 
-        mypage_promotion_button.setOnClickListener {
-            PromotionActivity.startActivity(this)
+        show_visited_store.setOnClickListener {
+            VisitedStoreActivity.startActivity(this)
         }
 
         close_my_page.setOnClickListener {

@@ -4,8 +4,9 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.awesome.amuclient.data.api.response.ClientResponse
 import com.awesome.amuclient.data.api.response.DefaultResponse
-import com.awesome.amuclient.data.api.response.ReviewListResponse
+import com.awesome.amuclient.data.api.response.ReviewResponse
 import com.awesome.amuclient.data.model.Client
+import com.awesome.amuclient.data.model.Constants.FIRST_CALL
 import com.awesome.amuclient.data.model.Review
 import com.awesome.amuclient.data.model.ReviewList
 import io.reactivex.Observable
@@ -44,27 +45,32 @@ class ReviewApi {
                     }
                 })
     }
-    fun getReview(
-        ReviewLists: MutableLiveData<ArrayList<ReviewList>>,
-        storeId: String
+    fun getReviewList(
+            ReviewLists: MutableLiveData<ArrayList<ReviewList>>,
+            reviewsTemp: ArrayList<Review>,
+            storeId: String,
+            lastId: String
     ) {
-        var reviewsTemp = ArrayList<Review>()
+        //var reviewsTemp = ArrayList<Review>()
 
         val joinApi = RetrofitObject.reviewService
-        joinApi.getReviewList(storeId.toString())
-            .enqueue(object : Callback<ReviewListResponse> {
+        joinApi.getReviewList(storeId.toString(), lastId)
+            .enqueue(object : Callback<ReviewResponse> {
 
-                override fun onFailure(call: Call<ReviewListResponse>, t: Throwable) {
+                override fun onFailure(call: Call<ReviewResponse>, t: Throwable) {
                     Log.e("Retrofit GetReview", "실패")
                     Log.e("Check", t.toString())
                 }
 
                 override fun onResponse(
-                    call: Call<ReviewListResponse>,
-                    response: Response<ReviewListResponse>
+                        call: Call<ReviewResponse>,
+                        response: Response<ReviewResponse>
                 )  {
                     if (response.isSuccessful && response.body() != null && response.body()!!.code == 200) {
                         Log.e("Get ReviewList Retrofit" , "success")
+                        if(lastId == FIRST_CALL && reviewsTemp.isNotEmpty()) {
+                            reviewsTemp.clear()
+                        }
                         reviewsTemp.addAll(response.body()!!.reviews)
                         getClientInfo(ReviewLists, reviewsTemp)
 
