@@ -81,7 +81,7 @@ class BowlingFragment : Fragment() {
                     (recyclerView.layoutManager as LinearLayoutManager?)!!.findLastVisibleItemPosition()
 
                 if (!recyclerView.canScrollVertically((1)) && lastVisibleItemPosition >= 0) {
-                    storeAdapter?.getLastStoreId(lastVisibleItemPosition)?.let { storeViewModel.getStore(lat,lng, "노래방", it) }
+                    storeAdapter?.getLastStoreId(lastVisibleItemPosition)?.let { storeViewModel.getStore(lat,lng, "볼링장", it) }
                 }
             }
         })
