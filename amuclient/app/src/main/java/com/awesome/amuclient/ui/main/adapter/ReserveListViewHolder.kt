@@ -13,14 +13,10 @@ class ReserveListViewHolder(itemView: View,
                             private val showDetailClick: (ReserveList)->Unit,
                             private val goReviewClick: (ReserveList)->Unit): RecyclerView.ViewHolder(itemView) {
 
-    private val storeName = itemView.store_name
-    private val storeImage = itemView.store_image
-    private val reserveTime = itemView.reserve_time
-
     fun bind(reserveList: ReserveList, requestManager: RequestManager) {
-        storeName.text = reserveList.store.name
-        requestManager.load(reserveList.store.image).circleCrop().into(storeImage)
-        reserveTime.text = reserveList.reserve.date
+        itemView.store_name.text = reserveList.store.name
+        requestManager.load(reserveList.store.image).circleCrop().into(itemView.store_image)
+        itemView.reserve_time.text = reserveList.reserve.date
 
         itemView.setOnClickListener{ itemClick(reserveList.store)}
         itemView.show_detail.setOnClickListener {showDetailClick(reserveList)}

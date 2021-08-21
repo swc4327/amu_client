@@ -1,5 +1,6 @@
 package com.awesome.amuclient.ui.main.view
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.awesome.amuclient.R
@@ -13,6 +14,15 @@ import net.daum.mf.map.api.MapPoint
 import net.daum.mf.map.api.MapView
 
 class ReserveDetailActivity : AppCompatActivity() {
+
+    companion object {
+        fun startActivity(activity : AppCompatActivity, reserve : Reserve, store : Store) {
+            val intent = Intent(activity, ReserveDetailActivity::class.java)
+            intent.putExtra("reserve", reserve)
+            intent.putExtra("store", store)
+            activity.startActivity(intent)
+        }
+    }
 
     private var mapManager : MapManager? = null
     private var store : Store? = null

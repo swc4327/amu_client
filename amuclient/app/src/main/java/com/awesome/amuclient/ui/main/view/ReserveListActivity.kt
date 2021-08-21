@@ -6,14 +6,18 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.awesome.amuclient.R
 import com.awesome.amuclient.data.model.*
+import com.awesome.amuclient.data.model.Constants.FIRST_CALL
 import com.awesome.amuclient.ui.main.adapter.ReserveListAdapter
 import com.awesome.amuclient.ui.main.viewmodel.FirebaseViewModel
 import com.awesome.amuclient.ui.main.viewmodel.ReserveViewModel
 import com.awesome.amuclient.ui.main.viewmodel.ReserveViewModelFactory
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_reserve_list.*
+import kotlinx.android.synthetic.main.fragment_menu.*
 
 class ReserveListActivity : AppCompatActivity() {
 
@@ -35,16 +39,20 @@ class ReserveListActivity : AppCompatActivity() {
         setContentView(R.layout.activity_reserve_list)
 
         initListener()
+        initRecyclerView()
 
         firebaseViewModel = ViewModelProvider(this).get(FirebaseViewModel::class.java)
         clientId = firebaseViewModel.getUid()
-        var factory = ReserveViewModelFactory(clientId.toString())
+        var factory = ReserveViewModelFactory(clientId)
         reserveViewModel = ViewModelProvider(this, factory).get(ReserveViewModel::class.java)
 
         observe()
+    }
 
-
-        reserveViewModel.getReserveList()
+    override fun onResume() {
+        super.onResume()
+        reserveListAdapter?.clearReserveLists()
+        reserveViewModel.getReserveList(FIRST_CALL)
     }
 
     private fun observe() {
@@ -52,14 +60,9 @@ class ReserveListActivity : AppCompatActivity() {
             if(reserveListAdapter == null) {
                 reserveListAdapter = ReserveListAdapter(arrayListOf(), Glide.with(this),
                     { store ->
-                    val intent = Intent(this, StoreInfoActivity::class.java)
-                    intent.putExtra("store", store)
-                    startActivity(intent)
+                    StoreInfoActivity.startActivity(this, store)
                 }, {reserveList ->
-                    val intent = Intent(this, ReserveDetailActivity::class.java)
-                    intent.putExtra("reserve", reserveList.reserve)
-                    intent.putExtra("store", reserveList.store)
-                    startActivity(intent)
+                    ReserveDetailActivity.startActivity(this, reserveList.reserve, reserveList.store)
                 }, {reserveList ->
                         when {
                             reserveList.reserve.is_completed == "0" -> {
@@ -69,17 +72,29 @@ class ReserveListActivity : AppCompatActivity() {
                                 Toast.makeText(this, "이미 리뷰를 작성하셨습니다!!", Toast.LENGTH_LONG).show()
                             }
                             else -> {
-                                val intent = Intent(this, ReviewActivity::class.java)
-                                intent.putExtra("reserveList", reserveList)
-                                startActivity(intent)
+                                ReviewActivity.startActivity(this, reserveList)
                             }
                         }
                 })
                 reserve_list.adapter = reserveListAdapter
             }
-            reserveListAdapter!!.update(reserveLists)
+            reserveListAdapter?.update(reserveLists)
         })
 
+    }
+    private fun initRecyclerView() {
+        reserve_list.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+
+                val lastVisibleItemPosition =
+                    (recyclerView.layoutManager as LinearLayoutManager?)!!.findLastVisibleItemPosition()
+
+                if (!recyclerView.canScrollVertically((1)) && lastVisibleItemPosition >= 0) {
+                    reserveListAdapter?.getLastReserveId(lastVisibleItemPosition)?.let { reserveViewModel.getReserveList(it) }
+                }
+            }
+        })
     }
 
     private fun initListener() {

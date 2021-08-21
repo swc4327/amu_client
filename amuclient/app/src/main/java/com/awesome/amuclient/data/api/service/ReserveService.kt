@@ -11,7 +11,7 @@ interface ReserveService {
             "content-type: application/json")
 
     @GET("/getReserveListC")
-    fun getReserveList(@Query("client_id") uid:String) : Call<ReserveResponse>
+    fun getReserveList(@Query("client_id") uid:String, @Query("lastId") lastId : String) : Call<ReserveResponse>
 
     @POST("reserve")
     fun addReserve(@Body params: Reserve) : Call<DefaultResponse>

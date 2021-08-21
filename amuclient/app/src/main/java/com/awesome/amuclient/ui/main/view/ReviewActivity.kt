@@ -25,6 +25,17 @@ class ReviewActivity : AppCompatActivity() {
     private var reserveList : ReserveList? = null
     private var clientId : String = ""
 
+    companion object {
+        private const val IMAGE_PICK_CODE = 1000;
+        private const val PERMISSION_CODE = 1001;
+
+        fun startActivity(activity : AppCompatActivity, reserveList : ReserveList) {
+            val intent = Intent(activity, ReviewActivity::class.java)
+            intent.putExtra("reserveList", reserveList)
+            activity.startActivity(intent)
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_review)
@@ -97,13 +108,6 @@ class ReviewActivity : AppCompatActivity() {
         submit_review.setOnClickListener {
             firebaseViewModel.uploadTask(add_image.drawable as BitmapDrawable, reserveList!!.reserve.id.toString() +"_review")
         }
-    }
-
-    companion object {
-        //image pick code
-        private val IMAGE_PICK_CODE = 1000;
-        //Permission code
-        val PERMISSION_CODE = 1001;
     }
 
     private fun pickImageFromGallery() {

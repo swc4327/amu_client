@@ -28,20 +28,42 @@ class ReserveListAdapter(private val reserveLists : ArrayList<ReserveList>,
 
     override fun onBindViewHolder(holder: ReserveListViewHolder, position: Int) {
         holder.bind(reserveLists[position], requestManager)
+    }
 
-//        holder.itemView.go_review.setOnClickListener {
-//
-//        }
-//
-//        holder.itemView.show_detail.setOnClickListener {
-//
-//        }
+    fun clearReserveLists() {
+        if(this.reserveLists.isNotEmpty()) {
+            this.reserveLists.clear()
+            notifyDataSetChanged()
+        }
+    }
+
+    fun getLastReserveId(position: Int) : String {
+        return this.reserveLists[position].reserve.id.toString()
     }
 
     fun update(reserveLists: ArrayList<ReserveList>) {
-        if(this.reserveLists.isNotEmpty())
-            this.reserveLists.clear()
-        this.reserveLists.addAll(reserveLists)
-        notifyDataSetChanged()
+        val endPosition = this.reserveLists.size
+
+        //계속 불러오는중
+        if(endPosition < reserveLists.size) {
+            loadMore(reserveLists, endPosition)
+        }
+//        else { //삭제됬거나, 디테일 변경 됬을 때
+//            if(this.reserveLists.isNotEmpty())
+//                this.reserveLists.clear()
+//            this.reserveLists.addAll(reserveLists)
+//            notifyDataSetChanged()
+//        }
+    }
+
+    private fun loadMore(reserveLists: ArrayList<ReserveList>, endPosition: Int) {
+        if (this.reserveLists.isEmpty()) {
+            this.reserveLists.addAll(reserveLists)
+        } else {
+            for (index in endPosition until reserveLists.size) {
+                this.reserveLists.add(index, reserveLists[index])
+            }
+        }
+        notifyItemRangeInserted(endPosition, this.reserveLists.size - endPosition)
     }
 }

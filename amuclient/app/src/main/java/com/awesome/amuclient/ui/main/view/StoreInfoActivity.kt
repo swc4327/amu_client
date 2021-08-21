@@ -15,6 +15,14 @@ class StoreInfoActivity : AppCompatActivity() {
 
     private var store : Store? = null
 
+    companion object {
+        fun startActivity(activity : AppCompatActivity, store : Store) {
+            val intent = Intent(activity, StoreInfoActivity::class.java)
+            intent.putExtra("store", store)
+            activity.startActivity(intent)
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_store_info)
