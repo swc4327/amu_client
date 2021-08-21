@@ -8,12 +8,11 @@ import com.awesome.amuclient.data.model.remote.MenuApi
 class MenuViewModel(private val storeId: String?) : ViewModel() {
     private val menuApi = MenuApi()
     val menus = MutableLiveData<ArrayList<Menu>>()
-    private val menusTemp = ArrayList<Menu>()
     val status = MutableLiveData<Int>()
 
     fun getMenu(lastId : String) {
         if (storeId != null) {
-            menuApi.getMenu(menus, storeId, lastId, menusTemp)
+            menuApi.getMenu(menus, storeId, lastId)
         }
     }
 

@@ -5,13 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.awesome.amuclient.R
 import com.awesome.amuclient.data.model.Reserve
-import com.awesome.amuclient.data.model.ReserveList
 import com.awesome.amuclient.data.model.Store
 import com.awesome.amuclient.map.MapManager
 import kotlinx.android.synthetic.main.activity_reserve_detail.*
-import net.daum.mf.map.api.MapPOIItem
-import net.daum.mf.map.api.MapPoint
-import net.daum.mf.map.api.MapView
 
 class ReserveDetailActivity : AppCompatActivity() {
 
@@ -49,7 +45,7 @@ class ReserveDetailActivity : AppCompatActivity() {
     private fun initLayout() {
         detail_store_name.text = store?.name
         detail_store_place.text = store?.place
-        detail_store_place_detail.text = store?.place_detail
+        detail_store_place_detail.text = store?.placeDetail
         detail_date.text = reserve?.date
     }
 

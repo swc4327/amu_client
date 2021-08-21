@@ -9,9 +9,6 @@ import com.awesome.amuclient.R
 import com.awesome.amuclient.data.model.Store
 import com.awesome.amuclient.map.MapManager
 import kotlinx.android.synthetic.main.fragment_info.*
-import net.daum.mf.map.api.MapPOIItem
-import net.daum.mf.map.api.MapPoint
-import net.daum.mf.map.api.MapView
 
 class InfoFragment() : Fragment() {
 
@@ -42,7 +39,7 @@ class InfoFragment() : Fragment() {
     }
     private fun initLayout() {
         info_place.text = store?.place
-        info_place_detail.text = store?.place_detail
+        info_place_detail.text = store?.placeDetail
     }
 
 }

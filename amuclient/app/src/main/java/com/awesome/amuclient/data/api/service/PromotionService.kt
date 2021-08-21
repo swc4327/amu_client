@@ -11,5 +11,5 @@ interface PromotionService {
             "content-type: application/json")
 
     @GET("/getPromotionList")
-    fun getPromotionList(@Query("store_id") store_id:String) : Call<PromotionResponse>
+    fun getPromotionList(@Query("storeId") storeId:String) : Call<PromotionResponse>
 }

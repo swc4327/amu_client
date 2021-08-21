@@ -11,7 +11,7 @@ interface ReviewService {
             "content-type: application/json")
 
     @GET("/getReviewList")
-    fun getReviewList(@Query("store_id") store_id:String, @Query("lastId") lastId:String) : Call<ReviewResponse>
+    fun getReviewList(@Query("storeId") storeId:String, @Query("lastId") lastId:String) : Call<ReviewResponse>
 
     @POST("/addReview")
     fun addReview(@Body params: Review) : Call<DefaultResponse>

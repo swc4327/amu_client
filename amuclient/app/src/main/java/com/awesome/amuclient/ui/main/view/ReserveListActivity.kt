@@ -17,7 +17,6 @@ import com.awesome.amuclient.ui.main.viewmodel.ReserveViewModel
 import com.awesome.amuclient.ui.main.viewmodel.ReserveViewModelFactory
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_reserve_list.*
-import kotlinx.android.synthetic.main.fragment_menu.*
 
 class ReserveListActivity : AppCompatActivity() {
 
@@ -65,10 +64,10 @@ class ReserveListActivity : AppCompatActivity() {
                     ReserveDetailActivity.startActivity(this, reserveList.reserve, reserveList.store)
                 }, {reserveList ->
                         when {
-                            reserveList.reserve.is_completed == "0" -> {
+                            reserveList.reserve.isCompleted == "0" -> {
                                 Toast.makeText(this, "리뷰 작성 기한이 아닙니다!!", Toast.LENGTH_LONG).show()
                             }
-                            reserveList.reserve.is_reviewed =="1" -> {
+                            reserveList.reserve.isReviewed =="1" -> {
                                 Toast.makeText(this, "이미 리뷰를 작성하셨습니다!!", Toast.LENGTH_LONG).show()
                             }
                             else -> {

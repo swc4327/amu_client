@@ -10,4 +10,4 @@ data class Menu(var id: Int?,
                 var image: String,
                 var price: String,
                 var comment: String,
-                var store_id : String) : Parcelable
+                var storeId : String) : Parcelable

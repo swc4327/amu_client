@@ -18,8 +18,8 @@ interface StoreService {
                  @Query("lastId") lastId: String) : Call<StoresResponse>
 
     @GET("/getStoreInfo")
-    fun getStoreInfo(@Query("store_id") store_id:String) : Call<StoreResponse>
+    fun getStoreInfo(@Query("storeId") storeId:String) : Call<StoreResponse>
 
     @GET("/getVisitedStore")
-    fun getVisitedStore(@Query("client_id") client_id:String) : Call<StoresResponse>
+    fun getVisitedStore(@Query("clientId") clientId:String) : Call<StoresResponse>
 }

@@ -37,27 +37,15 @@ class MenuAdapter(private val menus : ArrayList<Menu>,
 
     fun update(menus: ArrayList<Menu>) {
         val endPosition = this.menus.size
-
-        if(endPosition < menus.size) {
-            loadMore(menus, endPosition)
-        }
+        loadMore(menus, endPosition)
     }
 
     private fun loadMore(
             menus: ArrayList<Menu>,
             endPosition: Int
     ) {
-
-        if (this.menus.isEmpty()) {
-            this.menus.addAll(menus)
-        } else {
-            for (index in endPosition until menus.size) {
-                this.menus.add(index, menus[index])
-            }
-        }
-
+        this.menus.addAll(menus)
         notifyItemRangeInserted(endPosition, this.menus.size - endPosition)
-
     }
 
 }

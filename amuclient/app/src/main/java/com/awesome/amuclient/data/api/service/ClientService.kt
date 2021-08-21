@@ -14,5 +14,5 @@ interface ClientService {
     fun addClient(@Body params: Client) : Call<DefaultResponse>
 
     @GET("/getClient")
-    fun getClient(@Query("client_id") client_id:String) : Call<ClientResponse>
+    fun getClient(@Query("clientId") clientId:String) : Call<ClientResponse>
 }
