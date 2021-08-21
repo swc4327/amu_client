@@ -18,6 +18,5 @@ class ReviewViewHolder(itemView: View, private val itemClick: (ReviewList)->Unit
         itemView.time.text = reviewList.review.time
         itemView.setOnClickListener{ itemClick(reviewList)}
 
-
     }
 }

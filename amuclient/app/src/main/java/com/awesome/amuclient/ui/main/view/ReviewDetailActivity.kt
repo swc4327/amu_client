@@ -40,7 +40,7 @@ class ReviewDetailActivity : AppCompatActivity() {
             .load(client?.image)
             .into(profile_img)
     }
-    
+
     private fun initListener() {
         close_review_detail.setOnClickListener {
             finish()
