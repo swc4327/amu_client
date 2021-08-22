@@ -6,7 +6,6 @@ import com.awesome.amuclient.data.api.response.DefaultResponse
 import com.awesome.amuclient.data.api.response.ReserveResponse
 import com.awesome.amuclient.data.api.response.StoreResponse
 import com.awesome.amuclient.data.model.*
-import com.awesome.amuclient.data.model.Constants.FIRST_CALL
 import io.reactivex.Observable
 import retrofit2.Call
 import retrofit2.Callback
@@ -44,8 +43,7 @@ class ReserveApi {
     }
 
     fun getReserveList(
-        ReserveLists: MutableLiveData<ArrayList<ReserveList>>,
-        reservesTemp: ArrayList<Reserve>,
+        ReserveLists : MutableLiveData<ArrayList<ReserveList>>,
         clientId: String,
         lastId: String
     ) {
@@ -64,11 +62,7 @@ class ReserveApi {
                     )  {
                         println("^^^^^^^^^^^^^^^^^^^^^^^^^$response")
                         if (response.isSuccessful && response.body() != null && response.body()!!.code == 200) {
-                            if(lastId == FIRST_CALL && reservesTemp.isNotEmpty()) {
-                                reservesTemp.clear()
-                            }
-                            reservesTemp.addAll(response.body()!!.reserves)
-                            getStoreInfo(ReserveLists, reservesTemp)
+                            getStoreInfo(ReserveLists, response.body()!!.reserves)
                         } else {
 
                         }
