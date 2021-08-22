@@ -1,5 +1,6 @@
 package com.awesome.amuclient.ui.main.adapter
 
+import android.graphics.Color
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.awesome.amuclient.data.model.Store
@@ -15,5 +16,13 @@ class StoreViewHolder(itemView: View, private val itemClick: (Store) -> Unit): R
         itemView.count.text = "("+ store.count.toString() + ")"
 
         itemView.setOnClickListener { itemClick(store)}
+
+        if(store.isOpened == "0") { //영업종료
+            itemView.upper_text.text = "준비중"
+            itemView.upper_image.setBackgroundColor(Color.parseColor("#26000000"))
+        } else {
+            itemView.upper_text.text = ""
+            itemView.upper_image.setBackgroundColor(Color.parseColor("#00000000"))
+        }
     }
 }

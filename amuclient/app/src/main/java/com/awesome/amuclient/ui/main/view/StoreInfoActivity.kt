@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.TypedValue
+import android.view.View.GONE
 import com.awesome.amuclient.R
 import com.awesome.amuclient.data.model.Store
 import com.awesome.amuclient.ui.main.view.storeinfo.InfoFragment
@@ -40,6 +41,11 @@ class StoreInfoActivity : AppCompatActivity() {
         store_info_name.text = store!!.name
         point.text = store!!.point!!.toString()
         count.text = "("+store!!.count.toString()+")"
+
+        //영업중이 아닐때
+        if(store?.isOpened=="0") {
+            reserve_button.visibility = GONE
+        }
     }
 
     private fun initListener() {
