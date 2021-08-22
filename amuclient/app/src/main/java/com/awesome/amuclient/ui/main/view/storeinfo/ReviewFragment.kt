@@ -29,7 +29,7 @@ class ReviewFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         storeId = arguments?.getString("storeId")
-        reviewViewModel = ViewModelProvider(this, ReviewViewModelFactory(storeId.toString())).get(ReviewViewModel::class.java)
+        reviewViewModel = ViewModelProvider(this, ViewModelFactory(storeId.toString())).get(ReviewViewModel::class.java)
     }
 
     override fun onCreateView(

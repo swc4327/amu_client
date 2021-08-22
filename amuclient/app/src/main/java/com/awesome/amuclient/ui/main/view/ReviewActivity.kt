@@ -44,8 +44,8 @@ class ReviewActivity : AppCompatActivity() {
 
         firebaseViewModel = ViewModelProvider(this).get(FirebaseViewModel::class.java)
         clientId = firebaseViewModel.getUid()
-        var factory = ReviewViewModelFactory(clientId.toString())
-        reviewViewModel = ViewModelProvider(this, factory).get(ReviewViewModel::class.java)
+
+        reviewViewModel = ViewModelProvider(this, ViewModelFactory(clientId)).get(ReviewViewModel::class.java)
 
 
 
