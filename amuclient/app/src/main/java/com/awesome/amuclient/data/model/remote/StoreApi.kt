@@ -11,7 +11,11 @@ import retrofit2.Response
 
 class StoreApi {
 
-    fun getStore(stores: MutableLiveData<ArrayList<Store>>, storesTemp: ArrayList<Store>, lat: String, lng: String, kind: String, lastId : String) {
+    fun getStore(stores: MutableLiveData<ArrayList<Store>>,
+                 lat: String,
+                 lng: String,
+                 kind: String,
+                 lastId : String) {
 
         val joinApi = RetrofitObject.storeService
 
@@ -30,11 +34,7 @@ class StoreApi {
                 )  {
                     println(response)
                     if (response.isSuccessful && response.body() != null && response.body()!!.code == 200) {
-                        if(lastId == FIRST_CALL && storesTemp.isNotEmpty()) {
-                            storesTemp.clear()
-                        }
-                       storesTemp.addAll(response.body()!!.stores)
-                        stores.value = storesTemp
+                        stores.value = response.body()!!.stores
 
                     } else {
 
@@ -45,8 +45,7 @@ class StoreApi {
 
     fun getVisitedStore(
             clientId: String,
-            stores: MutableLiveData<ArrayList<Store>>,
-            storesTemp: ArrayList<Store>
+            stores: MutableLiveData<ArrayList<Store>>
     ) {
 
         val joinApi = RetrofitObject.storeService
@@ -66,11 +65,7 @@ class StoreApi {
                         if (response.isSuccessful && response.body() != null && response.body()!!.code == 200) {
                             Log.e("get store for promotion", "success")
                             //예약한 기록이 있고, 리뷰를 작성 했는 경우 -> store 추출
-                            if(storesTemp.isNotEmpty()) {
-                                storesTemp.clear()
-                            }
-                            storesTemp.addAll(response.body()!!.stores)
-                            stores.value = storesTemp
+                            stores.value = response.body()!!.stores
                         } else {
 
                         }

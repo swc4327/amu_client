@@ -47,7 +47,6 @@ class ReviewApi {
     }
     fun getReviewList(
             ReviewLists: MutableLiveData<ArrayList<ReviewList>>,
-            reviewsTemp: ArrayList<Review>,
             storeId: String,
             lastId: String
     ) {
@@ -68,11 +67,7 @@ class ReviewApi {
                 )  {
                     if (response.isSuccessful && response.body() != null && response.body()!!.code == 200) {
                         Log.e("Get ReviewList Retrofit" , "success")
-                        if(lastId == FIRST_CALL && reviewsTemp.isNotEmpty()) {
-                            reviewsTemp.clear()
-                        }
-                        reviewsTemp.addAll(response.body()!!.reviews)
-                        getClientInfo(ReviewLists, reviewsTemp)
+                        getClientInfo(ReviewLists, response.body()!!.reviews)
 
                     } else {
 

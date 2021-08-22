@@ -9,7 +9,6 @@ import com.awesome.amuclient.data.model.remote.ReviewApi
 class ReviewViewModel(private val storeId: String?) : ViewModel() {
     private val reviewApi = ReviewApi()
     val reviewLists = MutableLiveData<ArrayList<ReviewList>>()
-    private val reviewsTemp = ArrayList<Review>()
     val status = MutableLiveData<Int>()
 
     fun addReview(review : Review) {
@@ -18,7 +17,7 @@ class ReviewViewModel(private val storeId: String?) : ViewModel() {
 
     fun getReviewList(lastId : String) {
         if (storeId != null) {
-            reviewApi.getReviewList(reviewLists, reviewsTemp, storeId, lastId)
+            reviewApi.getReviewList(reviewLists, storeId, lastId)
         }
     }
 
