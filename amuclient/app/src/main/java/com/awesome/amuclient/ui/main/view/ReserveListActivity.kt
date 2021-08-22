@@ -14,7 +14,7 @@ import com.awesome.amuclient.data.model.Constants.FIRST_CALL
 import com.awesome.amuclient.ui.main.adapter.ReserveListAdapter
 import com.awesome.amuclient.ui.main.viewmodel.FirebaseViewModel
 import com.awesome.amuclient.ui.main.viewmodel.ReserveViewModel
-import com.awesome.amuclient.ui.main.viewmodel.ViewModelFactory
+import com.awesome.amuclient.ui.main.viewmodel.factory.ReserveViewModelFactory
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_reserve_list.*
 
@@ -43,7 +43,7 @@ class ReserveListActivity : AppCompatActivity() {
         firebaseViewModel = ViewModelProvider(this).get(FirebaseViewModel::class.java)
         clientId = firebaseViewModel.getUid()
 
-        reserveViewModel = ViewModelProvider(this, ViewModelFactory(clientId)).get(ReserveViewModel::class.java)
+        reserveViewModel = ViewModelProvider(this, ReserveViewModelFactory(clientId.toString())).get(ReserveViewModel::class.java)
 
         observe()
     }

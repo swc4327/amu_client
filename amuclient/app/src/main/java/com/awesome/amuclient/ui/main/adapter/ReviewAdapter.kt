@@ -38,27 +38,12 @@ class ReviewAdapter(private val reviewLists : ArrayList<ReviewList>,
 
     fun update(reviewLists: ArrayList<ReviewList>) {
         val endPosition = this.reviewLists.size
+        loadMore(reviewLists, endPosition)
 
-        //계속 불러오는중
-        if(endPosition < reviewLists.size) {
-            loadMore(reviewLists, endPosition)
-        }
-//        else { //삭제했을때
-//            if(this.reviewLists.isNotEmpty())
-//                this.reviewLists.clear()
-//            this.reviewLists.addAll(reviewLists)
-//            notifyDataSetChanged()
-//        }
     }
 
     private fun loadMore(reviewLists: ArrayList<ReviewList>, endPosition: Int) {
-        if (this.reviewLists.isEmpty()) {
-            this.reviewLists.addAll(reviewLists)
-        } else {
-            for (index in endPosition until reviewLists.size) {
-                this.reviewLists.add(index, reviewLists[index])
-            }
-        }
+        this.reviewLists.addAll(reviewLists)
         notifyItemRangeInserted(endPosition, this.reviewLists.size - endPosition)
     }
 }

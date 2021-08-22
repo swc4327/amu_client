@@ -14,7 +14,7 @@ import com.awesome.amuclient.data.model.Constants.FIRST_CALL
 import com.awesome.amuclient.data.model.Menu
 import com.awesome.amuclient.ui.main.adapter.MenuAdapter
 import com.awesome.amuclient.ui.main.viewmodel.MenuViewModel
-import com.awesome.amuclient.ui.main.viewmodel.ViewModelFactory
+import com.awesome.amuclient.ui.main.viewmodel.factory.MenuViewModelFactory
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.fragment_menu.*
 
@@ -27,7 +27,7 @@ class MenuFragment() : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         storeId = arguments?.getString("storeId")
-        menuViewModel = ViewModelProvider(this, ViewModelFactory(storeId.toString())).get(MenuViewModel::class.java)
+        menuViewModel = ViewModelProvider(this, MenuViewModelFactory(storeId.toString())).get(MenuViewModel::class.java)
     }
 
     override fun onCreateView(

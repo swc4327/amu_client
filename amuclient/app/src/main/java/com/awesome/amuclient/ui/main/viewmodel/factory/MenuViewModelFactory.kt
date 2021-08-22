@@ -1,9 +1,10 @@
-package com.awesome.amuclient.ui.main.viewmodel
+package com.awesome.amuclient.ui.main.viewmodel.factory
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.awesome.amuclient.ui.main.viewmodel.MenuViewModel
 
-class ViewModelFactory(private val param: String) : ViewModelProvider.Factory {
+class MenuViewModelFactory(private val param: String) : ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         return if (modelClass.isAssignableFrom(MenuViewModel::class.java)) {
             MenuViewModel(param) as T

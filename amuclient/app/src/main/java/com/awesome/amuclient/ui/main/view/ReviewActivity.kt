@@ -15,6 +15,7 @@ import com.awesome.amuclient.R
 import com.awesome.amuclient.data.model.ReserveList
 import com.awesome.amuclient.data.model.Review
 import com.awesome.amuclient.ui.main.viewmodel.*
+import com.awesome.amuclient.ui.main.viewmodel.factory.ReviewViewModelFactory
 import kotlinx.android.synthetic.main.activity_review.*
 
 class ReviewActivity : AppCompatActivity() {
@@ -45,7 +46,7 @@ class ReviewActivity : AppCompatActivity() {
         firebaseViewModel = ViewModelProvider(this).get(FirebaseViewModel::class.java)
         clientId = firebaseViewModel.getUid()
 
-        reviewViewModel = ViewModelProvider(this, ViewModelFactory(clientId)).get(ReviewViewModel::class.java)
+        reviewViewModel = ViewModelProvider(this, ReviewViewModelFactory(clientId)).get(ReviewViewModel::class.java)
 
 
 

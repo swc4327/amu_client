@@ -11,7 +11,7 @@ import com.awesome.amuclient.R
 import com.awesome.amuclient.data.model.Reserve
 import com.awesome.amuclient.ui.main.viewmodel.FirebaseViewModel
 import com.awesome.amuclient.ui.main.viewmodel.ReserveViewModel
-import com.awesome.amuclient.ui.main.viewmodel.ViewModelFactory
+import com.awesome.amuclient.ui.main.viewmodel.factory.ReserveViewModelFactory
 import com.google.android.gms.location.*
 import kotlinx.android.synthetic.main.activity_reserve.*
 
@@ -47,7 +47,7 @@ class ReserveActivity : AppCompatActivity() {
         storeId = intent.getStringExtra("storeId").toString()
 
         firebaseViewModel = ViewModelProvider(this).get(FirebaseViewModel::class.java)
-        reserveViewModel = ViewModelProvider(this, ViewModelFactory(firebaseViewModel.getUid())).get(ReserveViewModel::class.java)
+        reserveViewModel = ViewModelProvider(this, ReserveViewModelFactory(firebaseViewModel.getUid())).get(ReserveViewModel::class.java)
 
         initListener()
         observe()

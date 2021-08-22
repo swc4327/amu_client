@@ -39,23 +39,15 @@ class StoreAdapter(private val stores : ArrayList<Store>,
 
     fun update(stores: ArrayList<Store>) {
         val endPosition = this.stores.size
+        loadMore(stores, endPosition)
 
-        if(endPosition < stores.size) {
-            loadMore(stores, endPosition)
-        }
     }
 
     private fun loadMore(
         stores: ArrayList<Store>,
         endPosition: Int
     ) {
-        if (this.stores.isEmpty()) {
-            this.stores.addAll(stores)
-        } else {
-            for (index in endPosition until stores.size) {
-                this.stores.add(index, stores[index])
-            }
-        }
+        this.stores.addAll(stores)
         notifyItemRangeInserted(endPosition, this.stores.size - endPosition)
     }
 }
