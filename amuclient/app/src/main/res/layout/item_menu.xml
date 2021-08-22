@@ -6,9 +6,8 @@
     android:layout_marginLeft="10dp"
     android:layout_height="70dp">
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/menu_image"
-        android:src="@drawable/no_image"
         android:layout_width="60dp"
         android:layout_height="80dp"/>
 

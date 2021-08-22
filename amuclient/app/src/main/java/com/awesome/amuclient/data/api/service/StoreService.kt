@@ -2,6 +2,7 @@ package com.awesome.amuclient.data.api.service
 
 import com.awesome.amuclient.data.api.response.StoresResponse
 import com.awesome.amuclient.data.api.response.StoreResponse
+import com.google.gson.annotations.SerializedName
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Headers

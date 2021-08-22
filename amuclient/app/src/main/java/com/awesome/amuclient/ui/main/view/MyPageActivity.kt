@@ -63,6 +63,7 @@ class MyPageActivity : AppCompatActivity() {
                 if(task.isSuccessful) {
                     Glide.with(this)
                         .load(task.result)
+                        .circleCrop()
                         .into(profile_img)
                 } else {
                     Toast.makeText(this, "실패", Toast.LENGTH_LONG).show()

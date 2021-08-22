@@ -37,7 +37,7 @@ class StoreInfoActivity : AppCompatActivity() {
     }
 
     private fun initLayout() {
-        store_info_name.setText(store!!.name)
+        store_info_name.text = store!!.name
         point.text = store!!.point!!.toString()
         count.text = "("+store!!.count.toString()+")"
     }
@@ -75,7 +75,7 @@ class StoreInfoActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_area, MenuFragment().apply {
                 arguments = Bundle().apply {
-                    putString("store_id", store!!.id.toString())
+                    putString("storeId", store!!.id.toString())
                 }
             })
             .commit()
@@ -103,7 +103,7 @@ class StoreInfoActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_area, ReviewFragment().apply {
                 arguments = Bundle().apply {
-                    putString("store_id", store!!.id.toString())
+                    putString("storeId", store!!.id.toString())
                 }
             })
             .commit()

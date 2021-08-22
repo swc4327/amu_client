@@ -39,12 +39,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <de.hdodenhof.circleimageview.CircleImageView
+        <ImageView
             android:id="@+id/profile_img"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_margin="10dp"
-            android:src="@drawable/profile_gray"
             android:layout_width="80dp"
             android:layout_height="80dp"/>
         <TextView

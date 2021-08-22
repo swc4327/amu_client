@@ -26,7 +26,7 @@ class MenuFragment() : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        storeId = arguments?.getString("store_id")
+        storeId = arguments?.getString("storeId")
         menuViewModel = ViewModelProvider(this, MenuViewModelFactory(storeId.toString())).get(MenuViewModel::class.java)
     }
 

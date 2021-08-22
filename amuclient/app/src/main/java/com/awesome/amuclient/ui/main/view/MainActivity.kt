@@ -54,6 +54,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         firebaseViewModel = ViewModelProvider(this).get(FirebaseViewModel::class.java)
+        //firebaseViewModel.logout()
         initListener()
     }
 
